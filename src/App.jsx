@@ -11,7 +11,7 @@ export const ScoreStateContext = createContext(undefined);
 
 function App() {
   
-  const [score, setScore] = useState(500);
+  const [score, setScore] = useState(0);
 
   
   return (
@@ -23,6 +23,9 @@ function App() {
         <Market /> {/* ADD PROPS FOR WHAT CURRENCY EACH MARKET IS */}
       </ScoreStateContext.Provider>
       
+      <footer>
+        <p className="copyrights">&#169; Joey Ducharme - 2024</p>
+      </footer>
     </div>
   )
 }

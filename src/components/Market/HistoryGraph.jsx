@@ -4,13 +4,16 @@ import { PriceHistoryContext } from "./Market";
 import styles from "./HistoryGraph.module.css";
 
 function HistoryGraph() {
+    const [priceHighest, setPriceHighest] = useState(0);
+    const [priceLowest, setPriceLowest] = useState(0);
+
     const priceHistory = useContext(PriceHistoryContext);
 
     const canvasRef = useRef(undefined);
 
     const drawStyles = {
         color: "darkgreen",
-        pointSize: 2,
+        pointSize: 3,
     }
 
 
@@ -21,13 +24,13 @@ function HistoryGraph() {
 
         const unitWidth = history.length <= 1 ? width : width / history.length;
 
-        const maxPrice = Math.max(... history);
-        const minPrice = Math.min(... history);
+        const _priceHighest = Math.max(... history); // using instant constant or else there is a delay in the
+        const _priceLowest = Math.min(... history); // state value update for the canvas
 
         context.clearRect(0,0, width, height);
 
         for(let i=0; i<history.length; i++) {
-            const priceToHeight = _price =>  height-(height*(_price-minPrice)/(maxPrice-minPrice));
+            const priceToHeight = _price =>  height-(height*(_price-_priceLowest)/(_priceHighest-_priceLowest));
             
             const price = history[i];
             const size = drawStyles.pointSize;
@@ -54,15 +57,47 @@ function HistoryGraph() {
     }
 
 
+    const resizeCanvasDOM = () => {
+        const canvas = canvasRef.current;
+        if(!canvas) return;
+
+        canvas.width = canvas.getBoundingClientRect().width;
+        canvas.height = canvas.getBoundingClientRect().height;
+    }
+
+
+    // Resize canvas events
+    useEffect(() => {
+        resizeCanvasDOM();
+
+        window.addEventListener("resize", resizeCanvasDOM);
+        return(() => {
+            window.removeEventListener("resize", resizeCanvasDOM);
+        });
+    }, [])
+
+
+    // Update on priceHistory change
     useEffect(() => {
         const canvas = canvasRef.current;
         if(!canvas || !priceHistory) return;
+
+        // update new highest / lowest prices
+        setPriceHighest(Math.max(... priceHistory));
+        setPriceLowest(Math.min(... priceHistory));
+
+        // canvas draw
         drawHistoryOnCanvas(priceHistory, canvas);
     }, [priceHistory]);
 
+
     return (
         <div className={styles.HistoryGraph}>
-            <canvas ref={canvasRef}></canvas>
+            <div className={styles.canvasArea}>
+                <canvas ref={canvasRef} className={styles.canvas}></canvas>
+                <p className={styles.canvas_numberHighest}>Highest: {priceHighest}</p>
+                <p className={styles.canvas_numberLowest}>Lowest: {priceLowest}</p>
+            </div>
             <p>Price History</p>
             <p>{priceHistory.map((value, index) => (index===0 ? "" : ", ") + value)}</p>
         </div>

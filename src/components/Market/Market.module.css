@@ -12,16 +12,16 @@
     border-radius: 8px;
 }
 
+.Market > p, .amountInputArea, .buyOptions {
+    margin-bottom: 1rem;
+}
+
 .Market > p {
     text-align: center;
 }
 
 .title {
     font-size: 2rem;
-}
-
-.price {
-    margin: 1rem;
 }
 
 .priceNumber {
@@ -35,8 +35,8 @@
     min-width: max-content;
     width: fit-content;
 
-    margin: auto;
-    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .amountInputArea > input {
@@ -49,11 +49,11 @@
     display: flex;
     justify-content: space-evenly;
 
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .buyOptions > button {
-
     padding: 5px 10px;
 }
 

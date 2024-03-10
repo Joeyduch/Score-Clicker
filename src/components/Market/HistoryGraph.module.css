@@ -4,13 +4,36 @@
     text-align: center;
 }
 
-.HistoryGraph > canvas {
+.canvasArea {
+    position: relative;
+}
+
+.canvas {
     display: block;
 
     width: 100%;
+    aspect-ratio: 16/9;
 
     margin: auto;
 
     border: 2px solid green;
     border-radius: 8px;
+}
+
+.canvas_numberHighest, .canvas_numberLowest {
+    position: absolute;
+
+    font-weight: bolder;
+
+    user-select: none;
+}
+
+.canvas_numberHighest {
+    top: 4px;
+    left: 6px;
+}
+
+.canvas_numberLowest {
+    bottom: 4px;
+    left: 6px;
 }
