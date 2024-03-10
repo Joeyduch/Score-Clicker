@@ -1,0 +1,16 @@
+.HistoryGraph {
+    /* border: 2px solid orange; */
+
+    text-align: center;
+}
+
+.HistoryGraph > canvas {
+    display: block;
+
+    width: 100%;
+
+    margin: auto;
+
+    border: 2px solid green;
+    border-radius: 8px;
+}

@@ -1,0 +1,10 @@
+
+.App > * {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.score {
+  text-align: center;
+  font-size: 3rem;
+}

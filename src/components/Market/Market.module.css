@@ -1,0 +1,66 @@
+.Market {
+    width: 80%;
+    min-width: 300px;
+    max-width: 600px;
+
+    box-sizing: border-box;
+
+    margin: auto;
+    padding: 20px;
+
+    border: 2px solid green;
+    border-radius: 8px;
+}
+
+.Market > p {
+    text-align: center;
+}
+
+.title {
+    font-size: 2rem;
+}
+
+.price {
+    margin: 1rem;
+}
+
+.priceNumber {
+    font-size: 1.5rem;
+}
+
+
+.amountInputArea {
+    display: block;
+
+    min-width: max-content;
+    width: fit-content;
+
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.amountInputArea > input {
+    width: 5rem;
+}
+
+
+
+.buyOptions {
+    display: flex;
+    justify-content: space-evenly;
+
+    margin: auto;
+}
+
+.buyOptions > button {
+
+    padding: 5px 10px;
+}
+
+.buttonBuy {
+    background-color: lightgreen;
+}
+
+.buttonSell {
+    background-color:lightpink;
+}

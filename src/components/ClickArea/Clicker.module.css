@@ -1,0 +1,11 @@
+.Clicker {
+    position:absolute;
+    width: max-content;
+    padding: .5rem 1rem;
+
+    border-radius: 8px;
+    
+    user-select: none;
+
+    background-color: yellow;
+}
