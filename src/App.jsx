@@ -11,7 +11,7 @@ export const ScoreStateContext = createContext(undefined);
 
 function App() {
   
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useState(500);
 
   
   return (

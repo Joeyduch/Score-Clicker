@@ -37,6 +37,7 @@ function Market() {
 
     // misc
     const [marketSpeed, setMarketSpeed] = useState(1000); // miliseconds
+    const [isGraphVisible, setIsGraphVisible] = useState(true);
 
     // context values
     const gameScore = useContext(ScoreStateContext);
@@ -63,6 +64,11 @@ function Market() {
     const handleAmountInput = (event) => {
         const newAmount = event.target.value > 0 ? event.target.value : 1;
         setBuyAmount(b => newAmount);
+    }
+
+
+    const handleGraphToggle = () => {
+        setIsGraphVisible(v => !v);
     }
 
 
@@ -144,19 +150,27 @@ function Market() {
     return (
         <div className={styles.Market}>
             <p className={styles.title}>TICKET-MARKET</p>
-            <p>You have {ticketAmount} Tickets</p>
+            <p>You have <span className={styles.accentText}>{ticketAmount}</span> Tickets</p>
             <p className={styles.price}>Ticket price: <span className={styles.priceNumber}>{ticketPrice}</span> Score</p>
+
             <label className={styles.amountInputArea}>
                 Buy / Sell amount: <input onChange={(e)=>handleAmountInput(e)} type="number" value={buyAmount}/>
             </label>
+
             <div className={styles.buyOptions}>
                 <button className={styles.buttonBuy} onClick={handleBuy}>Buy {buyAmount} Ticket for {buyPrice} Score</button>
                 <button className={styles.buttonSell} onClick={handleSell}>Convert {buyAmount} Ticket into {buyPrice} Score</button>
             </div>
-            <p>Average buy price: {buyAverage.toFixed(2)}</p>
-            <p>Average sell price: {sellAverage.toFixed(2)}</p>
+            
+            <div className={styles.averagesArea}>
+                <p>Average buy price: <span className={styles.accentText}>{buyAverage.toFixed(2)}</span></p>
+                <p>Average sell price: <span className={styles.accentText}>{sellAverage.toFixed(2)}</span></p>
+            </div>
+            
+
+            <button onClick={handleGraphToggle} className={styles.buttonGraphToggle}>Toggle Graph</button>
             <PriceHistoryContext.Provider value={priceHistory}>
-                <HistoryGraph />
+                {isGraphVisible ? <HistoryGraph /> : ""}
             </PriceHistoryContext.Provider>
         </div>
     )

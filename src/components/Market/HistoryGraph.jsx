@@ -12,7 +12,9 @@ function HistoryGraph() {
     const canvasRef = useRef(undefined);
 
     const drawStyles = {
-        color: "darkgreen",
+        color: "black",
+        colorProfit: "darkgreen",
+        colorLoss: "red",
         pointSize: 3,
     }
 
@@ -39,15 +41,17 @@ function HistoryGraph() {
                 y: priceToHeight(price)
             }
 
+            const isProfit = i >= 1 && history[i] >= history[i-1];
+
             // draw circle
-            context.fillStyle = drawStyles.color;
+            context.fillStyle = isProfit ? drawStyles.colorProfit : drawStyles.colorLoss;
             context.beginPath();
             context.arc(graphPosition.x, graphPosition.y, size, 0, 2*Math.PI);
             context.fill();
 
             // draw line
             if(i >= 1) {
-                context.strokeStyle = drawStyles.color;
+                context.strokeStyle = isProfit ? drawStyles.colorProfit : drawStyles.colorLoss;
                 context.beginPath();
                 context.moveTo(unitWidth*(i-1), priceToHeight(history[i-1]));
                 context.lineTo(graphPosition.x, graphPosition.y);
@@ -98,8 +102,6 @@ function HistoryGraph() {
                 <p className={styles.canvas_numberHighest}>Highest: {priceHighest}</p>
                 <p className={styles.canvas_numberLowest}>Lowest: {priceLowest}</p>
             </div>
-            <p>Price History</p>
-            <p>{priceHistory.map((value, index) => (index===0 ? "" : ", ") + value)}</p>
         </div>
     )
 }

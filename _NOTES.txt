@@ -1,11 +1,8 @@
 
-Score game:
-
-- player can player only ONE auto-clicker but can upgrades its range, its effectiveness, its speed, etc.
-
+Mechanics ideas:
+    - player can player only ONE auto-clicker but can upgrades its range, its effectiveness, its speed, etc.
 
 
-- MARKET
-    - minimum price
-    - maximum price
-    - changeForce
+
+Market component:
+    - 
