@@ -62,8 +62,8 @@ function Market() {
     }
 
     const handleAmountInput = (event) => {
-        const newAmount = event.target.value > 0 ? event.target.value : 1;
-        setBuyAmount(b => newAmount);
+        const newAmount = event.target.value >= 0 ? event.target.value : 1;
+        setBuyAmount(b => Math.floor(newAmount));
     }
 
 
@@ -158,8 +158,8 @@ function Market() {
             </label>
 
             <div className={styles.buyOptions}>
-                <button className={styles.buttonBuy} onClick={handleBuy}>Buy {buyAmount} Ticket for {buyPrice} Score</button>
-                <button className={styles.buttonSell} onClick={handleSell}>Convert {buyAmount} Ticket into {buyPrice} Score</button>
+                <button className={styles.buttonBuy} onClick={handleBuy}>Buy {buyAmount} Ticket for <span className={styles.accentText}>{buyPrice}</span> Score</button>
+                <button className={styles.buttonSell} onClick={handleSell}>Convert {buyAmount} Ticket into <span className={styles.accentText}>{buyPrice}</span> Score</button>
             </div>
             
             <div className={styles.averagesArea}>

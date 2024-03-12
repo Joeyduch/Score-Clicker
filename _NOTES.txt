@@ -1,8 +1,40 @@
 
-Mechanics ideas:
-    - player can player only ONE auto-clicker but can upgrades its range, its effectiveness, its speed, etc.
+TO DO
+    - Upgrade tab
+        - upgrades class/object in App.jsx
+        -
+    - Custom Market with props:
+        - currency name (ex: Ticket)
+        - currency start value
+        - currency max/min values
+        - currency changeForce/influence
 
 
 
-Market component:
-    - 
+BUY UPGRADES
+    - Buy upgradeable auto-clicker
+    - Buy Markets (up to three? with different levels of prices and price influence)
+    - Markets: longer history
+    - Buy Gambling
+
+
+
+MARKET
+    - Option menu
+        - Toggle graph
+        - Reset average buy
+        - Reset average sell
+
+
+
+SAVE GAME
+
+
+TAB MENU
+    - See each tabs (etc. clicker, market1, market2, gamble) and toggle their visibility and change order (up and down)
+
+
+VISUAL
+    - look at UI references
+    - sketch UI
+    - refactor CSS
