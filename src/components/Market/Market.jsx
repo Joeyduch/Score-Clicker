@@ -113,7 +113,7 @@ function Market() {
 
 
     const updatePriceHistoryLifespan = () => {
-        const historyLifespanUpgrade = gameUpgrades.upgrades[1].upgradeList[1].getCurrentLevel();
+        const historyLifespanUpgrade = gameUpgrades.upgrades[1].upgradeList[0].getCurrentLevel();
         setPriceHistoryLifespan(basePriceHistoryLifespan + historyLifespanUpgrade);
     }
 

@@ -1,12 +1,12 @@
 export default class Upgrade {
     constructor(name="Upgrade-name", basePrice=10, priceMultiplier=2.0, maxLevel=99) {
-      this.name = name;
-      this.basePrice = basePrice;
-      this.priceMultiplier = priceMultiplier;
-      this.maxLevel = maxLevel;
-  
-      this.currentLevel = 0;
-      this.isMaxed = false;
+        this.name = name;
+        this.basePrice = basePrice;
+        this.priceMultiplier = priceMultiplier;
+        this.maxLevel = maxLevel;
+
+        this.currentLevel = 0;
+        this.isMaxed = false;
     }
   
     getName() {return this.name}
@@ -20,13 +20,14 @@ export default class Upgrade {
     setIsMaxed(bool) {this.isMaxed = bool}
   
     levelUp(amount=1) {
-      const clamped = Math.min(Math.max(this.getCurrentLevel() + amount, 0), this.getMaxLevel());
-  
-      this.setCurrentLevel(clamped);
-      this.setIsMaxed(this.getCurrentLevel() >= this.getMaxLevel())
+        const clamped = Math.min(Math.max(this.getCurrentLevel() + amount, 0), this.getMaxLevel());
+
+        this.setCurrentLevel(clamped);
+        this.setIsMaxed(this.getCurrentLevel() >= this.getMaxLevel())
     }
   
     calculatePrice() {
-      return this.getBasePrice() * Math.pow(this.getPriceMultiplier(), this.getCurrentLevel());
+        const price = this.getBasePrice() * Math.pow(this.getPriceMultiplier(), this.getCurrentLevel());
+        return Math.floor(price);
     }
   }

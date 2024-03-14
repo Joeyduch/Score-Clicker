@@ -14,6 +14,7 @@ import Market from './components/Market/Market';
 import './App.css';
 
 
+
 export const ScoreStateContext = createContext(undefined);
 export const UpgradesStateContext = createContext(undefined);
 
@@ -24,7 +25,7 @@ export default function App() {
 
   const [upgrades, setUpgrades] = useState([
     {
-      categoryName: "Clicker",
+      categoryName: "Clickers",
       upgradeList: [
         new Upgrade("Click Value", 5, 2),
       ]
@@ -33,8 +34,10 @@ export default function App() {
     {
       categoryName: "Markets",
       upgradeList: [
-        new Upgrade("Accessible Market Amount", 20, 10, 3),
-        new Upgrade("Price History Lifespan", 5, 2, 20),
+        new Upgrade("Price History Lifespan", 10, 1.2, 20),
+        new Upgrade("Access Market 1", 20, 1, 1),
+        new Upgrade("Access Market 2", 200, 1, 1),
+        new Upgrade("Access Market 3", 2000, 1, 1),
       ]
     },
   ]);
@@ -48,12 +51,12 @@ export default function App() {
         <UpgradesStateContext.Provider value={{upgrades, setUpgrades}}>
           <UpgradesMenu />
           <ClickArea />
-          {}
-          <Market /> {/* ADD PROPS FOR WHAT CURRENCY EACH MARKET IS */}
+          {upgrades[1].upgradeList[1].getIsMaxed() ? <Market /> : ""}
+          {upgrades[1].upgradeList[2].getIsMaxed() ? <Market /> : ""}
+          {upgrades[1].upgradeList[3].getIsMaxed() ? <Market /> : ""}
         </UpgradesStateContext.Provider>
       </ScoreStateContext.Provider>
-      
-      <h1>*** FIX MARKET AMOUNT UPGRADE ***</h1>
+
       <footer>
         <p className="copyrights">&#169; Joey Ducharme - 2024</p>
       </footer>

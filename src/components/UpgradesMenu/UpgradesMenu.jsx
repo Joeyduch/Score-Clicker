@@ -4,7 +4,7 @@ import { UpgradesStateContext, ScoreStateContext } from "../../App";
 import styles from "./UpgradesMenu.module.css";
 
 export default function Upgrades() {
-    const [isTabOpened, setIsTabOpened] = useState(true);
+    const [isTabOpened, setIsTabOpened] = useState(false);
 
     const gameScore = useContext(ScoreStateContext);
     const gameUpgrades = useContext(UpgradesStateContext);
@@ -24,7 +24,7 @@ export default function Upgrades() {
         const price = upgrade.calculatePrice();
         if(gameScore.score >= price) {
             upgrade.levelUp();
-            gameScore.setScore(s => s - price);
+            gameScore.setScore(s => Math.floor(s - price));
         }
         
         gameUpgrades.setUpgrades(u => [... gameUpgrades.upgrades]);
@@ -32,21 +32,21 @@ export default function Upgrades() {
 
 
     const body = <>
-        <p className={styles.title}>Upgrades</p>
+        <p className={styles.title}>UPGRADES</p>
 
-        {gameUpgrades.upgrades.map((category, index) => <div key={index}>
-            <p>{category.categoryName}</p>
+        {gameUpgrades.upgrades.map((category, index) => <div className={styles.upgradeCategory} key={index}>
+            <p className={styles.categoryName}>{category.categoryName}</p>
             <ul>
-                {category.upgradeList.map((upgrade, i) => <li key={`${index}-${i}`}>
-                    (lvl:{upgrade.getCurrentLevel()}) {upgrade.getName()} <button onClick={() => handleBuyUpgrade(index, i)}>Buy for {upgrade.calculatePrice()} score</button>
-                </li>)}
+                {category.upgradeList.map((upgrade, i) => !upgrade.getIsMaxed() ? <li className={styles.upgradeItem} key={`${index}-${i}`}>
+                    {upgrade.getName()} (lvl:{upgrade.getCurrentLevel()}) <button onClick={() => handleBuyUpgrade(index, i)}>Buy for {upgrade.calculatePrice()} score</button>
+                </li> : "")}
             </ul>
         </div>)}
     </>
 
 
     return <div className={styles.Upgrades}>
-        <button onClick={handleTabToggle}>Toggle</button>
+        <button className={styles.toggleButton} onClick={handleTabToggle}>Upgrades</button>
         {isTabOpened ? body : ""}
     </div>
 }
