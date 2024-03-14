@@ -81,7 +81,7 @@ function HistoryGraph() {
     }, [])
 
 
-    // Update on priceHistory change
+    // Update on priceHistory change (Draw canvas + high/low update)
     useEffect(() => {
         const canvas = canvasRef.current;
         if(!canvas || !priceHistory) return;

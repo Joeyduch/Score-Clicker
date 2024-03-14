@@ -1,6 +1,6 @@
 
 import React, { useState, useRef, useEffect, createContext, useContext } from "react";
-import { ScoreStateContext } from "../../App";
+import { ScoreStateContext, UpgradesStateContext } from "../../App";
 import HistoryGraph from "./HistoryGraph";
 import styles from "./Market.module.css";
 
@@ -33,7 +33,8 @@ function Market() {
     // price history
     const [priceHistory, setPriceHistory] = useState([]);
     const [historyTimestamp, setHistoryTimestamp] = useState(0);
-    const [priceHistoryLifespan, setPriceHistoryLifespan] = useState(20);
+    const [priceHistoryLifespan, setPriceHistoryLifespan] = useState(0);
+    const [basePriceHistoryLifespan, setBasePriceHistoryLifespan] = useState(10);
 
     // misc
     const [marketSpeed, setMarketSpeed] = useState(1000); // miliseconds
@@ -41,6 +42,7 @@ function Market() {
 
     // context values
     const gameScore = useContext(ScoreStateContext);
+    const gameUpgrades = useContext(UpgradesStateContext);
 
     
     const handleBuy = () => {
@@ -110,6 +112,12 @@ function Market() {
     }
 
 
+    const updatePriceHistoryLifespan = () => {
+        const historyLifespanUpgrade = gameUpgrades.upgrades[1].upgradeList[1].getCurrentLevel();
+        setPriceHistoryLifespan(basePriceHistoryLifespan + historyLifespanUpgrade);
+    }
+
+
     // Update buy price
     useEffect(() => {
         setBuyPrice(p => ticketPrice * buyAmount);
@@ -120,12 +128,12 @@ function Market() {
     useEffect(() => {
         const average = totalExpenses / totalBought;
         setBuyAverage(average || 0);
-    }, [totalBought, totalExpenses]);
+    }, [totalBought, totalExpenses])
 
     useEffect(() => {
         const average = totalIncome / totalSold;
         setSellAverage(average || 0);
-    }, [totalSold, totalIncome]);
+    }, [totalSold, totalIncome])
 
 
     // Update price history
@@ -134,9 +142,10 @@ function Market() {
     }, [ticketPrice, historyTimestamp])
 
 
-    // Market up - down
+    // Market up - down + PriceHistoryLifespan update
     useEffect(() => {
         const intervalId = setInterval(() => {
+            updatePriceHistoryLifespan();
             calculatePriceChange();
             setHistoryTimestamp(t => (t + 1) % Number.MAX_SAFE_INTEGER);
         }, marketSpeed);

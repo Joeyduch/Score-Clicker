@@ -1,16 +1,18 @@
 
 import React, {useRef, useState, useEffect, useContext} from "react";
-import { ScoreStateContext } from "../../App";
+import { ScoreStateContext, UpgradesStateContext } from "../../App";
 import styles from "./Clicker.module.css";
 
 
 
 function Clicker(props) {
     const [position, setPosition] = useState({x:0, y: 0});
+    const [clickValue, setClickValue] = useState(1);
 
     const buttonRef = useRef(undefined);
 
     const gameScore = useContext(ScoreStateContext);
+    const gameUpgrades = useContext(UpgradesStateContext);
 
 
     const handleClick = () => {
@@ -18,7 +20,7 @@ function Clicker(props) {
         changePosition();
 
         // handle onClick event if there is any
-        if(gameScore) gameScore.setScore(s => s + 1);
+        if(gameScore) gameScore.setScore(s => s + clickValue);
 
         // unfocus button
         if(buttonRef) buttonRef.current.blur();
@@ -39,11 +41,19 @@ function Clicker(props) {
     }
 
 
+    // On Mount
     useEffect(() => {
         window.addEventListener("resize", handleWindowResize);
 
         return(() => {window.removeEventListener("resize", handleWindowResize)});
-    }, []);
+    }, [])
+
+
+    // On Render
+    useEffect(() => {
+        const upgrade = gameUpgrades.upgrades[0].upgradeList[0]
+        setClickValue(c => 1 + upgrade.getCurrentLevel());
+    })
 
 
     return (
