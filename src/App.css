@@ -1,12 +1,19 @@
 
-.App > * {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+.App {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 .score {
+  margin-top: 2rem;
+
   text-align: center;
   font-size: 3rem;
+}
+
+footer {
+  margin-bottom: 2rem;
 }
 
 .copyrights {

@@ -3,25 +3,25 @@
     width: max-content;
     padding: .5rem 1rem;
 
-    border: 1px solid transparent;
     border-radius: 8px;
     
     user-select: none;
 
+    color: black;
+
+    background: none;
     background-color: yellow;
 
-    box-shadow: 0px 0px 4px 0px rgba(0,0,0, 0.5);
     text-shadow: 0px 0px 0px rgba(0,0,0, 0);
 
     font-weight: bolder;
 
-    transition: border 200ms, text-shadow 200ms;
+    transition: all 200ms, top 100ms, left 100ms;
 }
 
 .Clicker:hover {
-    border: 1px solid grey;
+    box-shadow: 0px 0px 8px 0px rgba(255, 255, 0);
 
-    box-shadow: 0px 0px 4px 0px rgba(0,0,0, 0.75);
     text-shadow: 0px 0px 1px rgba(0,0,0, 0.5);
 
     cursor: pointer;

@@ -163,7 +163,7 @@ function Market() {
             <p className={styles.price}>Ticket price: <span className={styles.priceNumber}>{ticketPrice}</span> Score</p>
 
             <label className={styles.amountInputArea}>
-                Buy / Sell amount: <input onChange={(e)=>handleAmountInput(e)} type="number" value={buyAmount}/>
+                Buy / Sell amount: <input className={styles.amountInput} onChange={(e)=>handleAmountInput(e)} type="number" value={buyAmount}/>
             </label>
 
             <div className={styles.buyOptions}>

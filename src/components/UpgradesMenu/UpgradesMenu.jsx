@@ -33,12 +33,13 @@ export default function Upgrades() {
 
     const body = <>
         <p className={styles.title}>UPGRADES</p>
+        <p className={styles.scoreIndicator}>Score: {gameScore.score}</p>
 
         {gameUpgrades.upgrades.map((category, index) => <div className={styles.upgradeCategory} key={index}>
             <p className={styles.categoryName}>{category.categoryName}</p>
             <ul>
                 {category.upgradeList.map((upgrade, i) => !upgrade.getIsMaxed() ? <li className={styles.upgradeItem} key={`${index}-${i}`}>
-                    {upgrade.getName()} (lvl:{upgrade.getCurrentLevel()}) <button onClick={() => handleBuyUpgrade(index, i)}>Buy for {upgrade.calculatePrice()} score</button>
+                    {upgrade.getName()} (lvl:{upgrade.getCurrentLevel()}) <button className={styles.buyButton} onClick={() => handleBuyUpgrade(index, i)}>Buy for {upgrade.calculatePrice()} score</button>
                 </li> : "")}
             </ul>
         </div>)}

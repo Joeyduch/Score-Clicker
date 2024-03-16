@@ -13,7 +13,7 @@ function HistoryGraph() {
 
     const drawStyles = {
         color: "black",
-        colorProfit: "darkgreen",
+        colorProfit: "green",
         colorLoss: "red",
         pointSize: 3,
     }
@@ -99,8 +99,8 @@ function HistoryGraph() {
         <div className={styles.HistoryGraph}>
             <div className={styles.canvasArea}>
                 <canvas ref={canvasRef} className={styles.canvas}></canvas>
-                <p className={styles.canvas_numberHighest}>Highest: {priceHighest}</p>
-                <p className={styles.canvas_numberLowest}>Lowest: {priceLowest}</p>
+                <p className={styles.canvas_numberHighest}>High: {priceHighest}</p>
+                <p className={styles.canvas_numberLowest}>Low: {priceLowest}</p>
             </div>
         </div>
     )

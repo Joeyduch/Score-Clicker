@@ -1,4 +1,60 @@
+@font-face {
+    font-family: 'SometypeMono';
+    src: url('../public/SometypeMono.ttf') format('truetype');
+}
+
+:root {
+    --green-gradient: linear-gradient(135deg, #0ac11a, #055f0c);
+    --red-gradient: linear-gradient(135deg, #f20d0d, #920808);
+}
+
+
+
+/*
+    GENERAL
+*/
+
 *, body {
     margin: 0;
     padding: 0;
+
+    color: white;
+
+    border: none;
+
+    font-family: "SometypeMono", monospace;
+}
+
+body {
+    background-color: #0d1628;
+}
+
+
+
+/*
+    ELEMENTS
+*/
+
+button {
+    padding: 4px 8px;
+
+    border: 2px solid transparent;
+    border-radius: 4px;
+
+    background: var(--green-gradient);
+    background-origin: border-box !important;
+
+    transition: all 200ms;
+}
+
+button:hover {
+    border: 2px solid white;
+}
+
+
+input {
+    border: 1px solid white;
+    border-radius: 4px;
+
+    background-color: transparent;
 }

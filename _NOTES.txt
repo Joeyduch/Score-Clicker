@@ -1,13 +1,13 @@
 
 TO DO
-    - Upgrade tab
-        - upgrades class/object in App.jsx
-        -
     - Custom Market with props:
         - currency name (ex: Ticket)
         - currency start value
         - currency max/min values
         - currency changeForce/influence
+    - Market averages reset button
+    - Better upgrades (timer-autoclicker, markets all have different currency name)
+    - SaveGame
 
 
 
@@ -29,9 +29,6 @@ MARKET
 
 SAVE GAME
 
-
-TAB MENU
-    - See each tabs (etc. clicker, market1, market2, gamble) and toggle their visibility and change order (up and down)
 
 
 VISUAL
