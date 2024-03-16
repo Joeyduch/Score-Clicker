@@ -34,10 +34,10 @@ export default function App() {
     {
       categoryName: "Markets",
       upgradeList: [
-        new Upgrade("Price History Lifespan", 10, 1.2, 20),
         new Upgrade("Access Ticket Market (easy)", 20, 1, 1),
-        new Upgrade("Access TixCoin Market (medium)", 500, 1, 1),
-        new Upgrade("Access Golden-T Market (hard)", 2000, 1, 1),
+        new Upgrade("Access TixCoin Market (medium)", 800, 1, 1),
+        new Upgrade("Access Golden-T Market (hard)", 5000, 1, 1),
+        new Upgrade("Price History Lifespan", 10, 1.2, 20),
       ]
     },
   ]);
@@ -51,9 +51,9 @@ export default function App() {
         <UpgradesStateContext.Provider value={{upgrades, setUpgrades}}>
           <UpgradesMenu />
           <ClickArea />
-          {upgrades[1].upgradeList[1].getIsMaxed() ? <Market priceStart={50} priceMinimum={1} priceMaximum={100} priceInfluence={5} /> : ""}
-          {upgrades[1].upgradeList[2].getIsMaxed() ? <Market name="TixCoin" priceStart={750} priceMinimum={500} priceMaximum={1000} priceInfluence={50} /> : ""}
-          {upgrades[1].upgradeList[3].getIsMaxed() ? <Market name="Golden-T" priceStart={5000} priceMinimum={2000} priceMaximum={10000} priceInfluence={100} /> : ""}
+          {upgrades[1].upgradeList[0].getIsMaxed() ? <Market priceStart={50} priceMinimum={1} priceMaximum={100} priceInfluence={5} /> : ""}
+          {upgrades[1].upgradeList[1].getIsMaxed() ? <Market name="TixCoin" priceStart={750} priceMinimum={500} priceMaximum={1000} priceInfluence={50} /> : ""}
+          {upgrades[1].upgradeList[2].getIsMaxed() ? <Market name="Golden-T" priceStart={5000} priceMinimum={2000} priceMaximum={10000} priceInfluence={100} /> : ""}
         </UpgradesStateContext.Provider>
       </ScoreStateContext.Provider>
 

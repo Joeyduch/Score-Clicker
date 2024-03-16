@@ -1,6 +1,7 @@
 .Clicker {
     position:absolute;
     width: max-content;
+
     padding: .5rem 1rem;
 
     border-color: yellow;
@@ -10,7 +11,6 @@
 
     color: white;
 
-    background: none;
     background-color: rgba(0,0,0, 0.2);
 
     text-shadow: 0px 0px 0px rgba(0,0,0, 0);

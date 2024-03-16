@@ -1,18 +1,24 @@
 
 .Upgrades {
     position:fixed;
-    top:0px;
+    top: 0px;
+    right: 0px;
     z-index: 1;
 
-    width: auto;
+    width: 100%;
 
     margin: 0 !important;
 
-    background-color: #0d1628;
+    backdrop-filter: blur(10px);
+
+    /* background: linear-gradient(0deg, var(--color-background), black); */
 }
 
 .toggleButton {
-    padding: 4px 8px;
+    position: inherit;
+    right: 0px;
+
+    padding: 8px 12px;
 
     background: none;
     background-color: rgb(20, 20, 20);
@@ -25,15 +31,17 @@
     background-color: rgb(50, 50, 50);
 }
 
+.title, .upgradeItem, .categoryName {
+    text-shadow: 0px 0px 4px black;
+}
+
 .title {
-    width: 100vw;
+    width: 100%;
+
+    margin-top: 2rem;
 
     font-size: 2rem;
 
-    text-align: center;
-}
-
-.scoreIndicator {
     text-align: center;
 }
 
@@ -62,7 +70,11 @@
 }
 
 .buyButton {
+    background: var(--gradient-green);
 
+    box-shadow: 2px 2px 4px 0px rgba(0,0,0, 0.5);
+}
 
-    
+.buyButton:hover {
+    box-shadow: 2px 2px 4px 0px transparent;
 }

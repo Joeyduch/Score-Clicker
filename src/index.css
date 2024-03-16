@@ -4,8 +4,10 @@
 }
 
 :root {
-    --green-gradient: linear-gradient(135deg, #0ac11a, #055f0c);
-    --red-gradient: linear-gradient(135deg, #f20d0d, #920808);
+    --color-background: #0c1625;
+    --gradient-green: linear-gradient(135deg, #0ac11a, #055f0c);
+    --gradient-red: linear-gradient(135deg, #f20d0d, #920808);
+    --gradient-yellow: linear-gradient(135deg, #f2e90d, #928e08);
 }
 
 
@@ -26,7 +28,7 @@
 }
 
 body {
-    background-color: #0d1628;
+    background-color: var(--color-background);
 }
 
 
@@ -36,12 +38,13 @@ body {
 */
 
 button {
+    user-select: none;
+
     padding: 4px 8px;
 
     border: 2px solid transparent;
     border-radius: 4px;
 
-    background: var(--green-gradient);
     background-origin: border-box !important;
 
     transition: all 200ms;

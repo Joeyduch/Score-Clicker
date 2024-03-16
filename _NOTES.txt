@@ -1,7 +1,9 @@
 
 TO DO
     - Market averages reset button
-    - Better upgrades (timer-autoclicker, markets all have different currency name)
+    - Better upgrades
+        - timer-autoclicker, markets all have different currency name
+        - a better way to access them in JSX (instead of array[i]upgrade[n] somethin somethin...)
     - Fix window resize clicker position reset only if width changes (for mainly mobile)
     - SaveGame
 
@@ -9,9 +11,7 @@ TO DO
 
 BUY UPGRADES
     - Buy upgradeable auto-clicker
-    - Buy Markets (up to three? with different levels of prices and price influence)
-    - Markets: longer history
-    - Buy Gambling
+    - Buy Gambling ?
 
 
 
@@ -24,6 +24,11 @@ MARKET
 
 
 SAVE GAME
+    - Score
+    - Upgrades
+    - Markets
+        - amount
+        - value
 
 
 
