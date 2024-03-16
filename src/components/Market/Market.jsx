@@ -1,5 +1,6 @@
 
 import React, { useState, useRef, useEffect, createContext, useContext } from "react";
+import PropTypes from "prop-types";
 import { ScoreStateContext, UpgradesStateContext } from "../../App";
 import HistoryGraph from "./HistoryGraph";
 import styles from "./Market.module.css";
@@ -8,14 +9,15 @@ import styles from "./Market.module.css";
 export const PriceHistoryContext = createContext([]);
 
 
-function Market() {
+function Market(props) {
     // ticket data
-    const [ticketPrice, setTicketPrice] = useState(50);
+    const [ticketName, setTicketName] = useState(props.name || "Ticket");
+    const [ticketPrice, setTicketPrice] = useState(props.priceStart || 50);
     const [ticketAmount, setTicketAmount] = useState(0);
 
-    const [priceMaximum, setPriceMaximum] = useState(100);
-    const [priceMinimum, setPriceMinimum] = useState(10);
-    const [priceChangeForce, setPriceChangeForce] = useState(5);
+    const [priceMaximum, setPriceMaximum] = useState(props.priceMaximum || 100);
+    const [priceMinimum, setPriceMinimum] = useState(props.priceMinimum || 10);
+    const [priceChangeInfluence, setPriceChangeInfluence] = useState(props.priceInfluence || 5);
 
     // buy total data
     const [buyAmount, setBuyAmount] = useState(1);
@@ -75,12 +77,16 @@ function Market() {
 
 
     const calculatePriceChange = () => {
-        if((priceMaximum-priceMinimum) / 2 < priceChangeForce) {
-            console.warn("priceMaximum and priceMinimum values' difference is smaller than priceChangeForce, price may go out of bound");
-        } // could put this error handling somewhere else...
+        // warnings
+        if(priceMinimum > priceMaximum) {
+            console.warn("priceMaximum is lower than priceMinimum");
+        }
+        if((priceMaximum-priceMinimum) / 2 < priceChangeInfluence) {
+            console.warn("priceMaximum and priceMinimum values' difference is smaller than priceChangeInfluence, price may go out of bound");
+        }
 
         // calculate new priceChange value
-        const getRandomPriceChange = () => Math.round(-priceChangeForce + Math.random()*(priceChangeForce*2));
+        const getRandomPriceChange = () => Math.round(-priceChangeInfluence + Math.random()*(priceChangeInfluence*2));
         let priceChange = getRandomPriceChange();
 
         // making sure the price change is in range, if price is way out of range by a bug, it will correct towards range
@@ -158,8 +164,8 @@ function Market() {
 
     return (
         <div className={styles.Market}>
-            <p className={styles.title}>TICKET-MARKET</p>
-            <p>You have <span className={styles.accentText}>{ticketAmount}</span> Tickets</p>
+            <p className={styles.title}>{ticketName.toUpperCase()} MARKET</p>
+            <p>You have <span className={styles.accentText}>{ticketAmount}</span> {ticketName}(s)</p>
             <p className={styles.price}>Ticket price: <span className={styles.priceNumber}>{ticketPrice}</span> Score</p>
 
             <label className={styles.amountInputArea}>
@@ -167,8 +173,8 @@ function Market() {
             </label>
 
             <div className={styles.buyOptions}>
-                <button className={styles.buttonBuy} onClick={handleBuy}>Buy {buyAmount} Ticket for <span className={styles.accentText}>{buyPrice}</span> Score</button>
-                <button className={styles.buttonSell} onClick={handleSell}>Convert {buyAmount} Ticket into <span className={styles.accentText}>{buyPrice}</span> Score</button>
+                <button className={styles.buttonBuy} onClick={handleBuy}>Buy {buyAmount} {ticketName}(s) for <span className={styles.accentText}>{buyPrice}</span> Score</button>
+                <button className={styles.buttonSell} onClick={handleSell}>Convert {buyAmount} {ticketName}(s) into <span className={styles.accentText}>{buyPrice}</span> Score</button>
             </div>
             
             <div className={styles.averagesArea}>
@@ -183,6 +189,16 @@ function Market() {
             </PriceHistoryContext.Provider>
         </div>
     )
+}
+
+
+
+Market.propTypes = {
+    name: PropTypes.string,
+    priceStart: PropTypes.number,
+    priceMaximum: PropTypes.number,
+    priceMinimum: PropTypes.number,
+    priceInfluence: PropTypes.number,
 }
 
 

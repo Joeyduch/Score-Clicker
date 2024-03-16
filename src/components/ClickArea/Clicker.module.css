@@ -3,14 +3,15 @@
     width: max-content;
     padding: .5rem 1rem;
 
+    border-color: yellow;
     border-radius: 8px;
     
     user-select: none;
 
-    color: black;
+    color: white;
 
     background: none;
-    background-color: yellow;
+    background-color: rgba(0,0,0, 0.2);
 
     text-shadow: 0px 0px 0px rgba(0,0,0, 0);
 
@@ -20,9 +21,23 @@
 }
 
 .Clicker:hover {
-    box-shadow: 0px 0px 8px 0px rgba(255, 255, 0);
+    color: black;
+    border-color: white;
+    background-color: yellow;
 
+    box-shadow: 0px 0px 8px 0px rgba(255, 255, 0);
     text-shadow: 0px 0px 1px rgba(0,0,0, 0.5);
 
     cursor: pointer;
+
+    
+}
+
+.Clicker:active {
+    background-color: lightyellow;
+
+    box-shadow: 0px 0px 16px 0px rgba(255, 255, 0, 0.5);
+    text-shadow: 0px 0px 2px rgba(0,0,0, 0.8);
+
+    transition: background-color 50ms;
 }

@@ -1,12 +1,8 @@
 
 TO DO
-    - Custom Market with props:
-        - currency name (ex: Ticket)
-        - currency start value
-        - currency max/min values
-        - currency changeForce/influence
     - Market averages reset button
     - Better upgrades (timer-autoclicker, markets all have different currency name)
+    - Fix window resize clicker position reset only if width changes (for mainly mobile)
     - SaveGame
 
 

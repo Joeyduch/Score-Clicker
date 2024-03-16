@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'SometypeMono';
-    src: url('../public/SometypeMono.ttf') format('truetype');
+    src: url('/SometypeMono.ttf') format('truetype');
 }
 
 :root {
