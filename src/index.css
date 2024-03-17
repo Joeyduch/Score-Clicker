@@ -8,6 +8,9 @@
     --gradient-green: linear-gradient(135deg, #0ac11a, #055f0c);
     --gradient-red: linear-gradient(135deg, #f20d0d, #920808);
     --gradient-yellow: linear-gradient(135deg, #f2e90d, #928e08);
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255, 0.05), rgba(255, 255, 255, 0.1));
+
+    --box-shadow-standard: 2px 2px 8px 0px rgba(0,0,0, 0.5);
 }
 
 

@@ -1,11 +1,10 @@
 
 TO DO
-    - Market averages reset button
+    - Fix window resize clicker position reset only if width changes (for mainly mobile)
+    - SaveGame
     - Better upgrades
         - timer-autoclicker, markets all have different currency name
         - a better way to access them in JSX (instead of array[i]upgrade[n] somethin somethin...)
-    - Fix window resize clicker position reset only if width changes (for mainly mobile)
-    - SaveGame
 
 
 

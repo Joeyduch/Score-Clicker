@@ -19,11 +19,12 @@
 
     margin: auto;
 
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 8px;
 
-    background: linear-gradient(135deg, rgba(255,255,255, 0.05), rgba(255, 255, 255, 0.1));
+    background: var(--gradient-glass);
 
-    box-shadow: 1px 1px 4px 0px rgba(0,0,0, 0.2);
+    box-shadow: var(--box-shadow-standard);
 }
 
 .canvas_numberHighest, .canvas_numberLowest {
