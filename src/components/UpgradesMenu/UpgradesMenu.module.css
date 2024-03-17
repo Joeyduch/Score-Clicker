@@ -20,14 +20,17 @@
 
     padding: 8px 12px;
 
-    background: none;
+    color: black;
+
+    background: var(--gradient-yellow);
     background-color: rgb(20, 20, 20);
+
+    font-weight: bolder;
 
     transition: all 200ms;
 }
 
 .toggleButton:hover {
-    border-color: transparent;
     background-color: rgb(50, 50, 50);
 }
 

@@ -76,6 +76,18 @@ function Market(props) {
     }
 
 
+    const handleResetAverageBuy = () => {
+        setTotalBought(b => 0);
+        setTotalExpenses(e => 0);
+    }
+
+
+    const handleResetAverageSell = () => {
+        setTotalSold(s => 0);
+        setTotalIncome(i => 0);
+    }
+
+
     const calculatePriceChange = () => {
         // warnings
         if(priceMinimum > priceMaximum) {
@@ -184,6 +196,8 @@ function Market(props) {
             
 
             <button onClick={handleGraphToggle} className={styles.buttonGraphToggle}>Toggle Graph</button>
+            <button onClick={handleResetAverageBuy} className={styles.buttonGraphToggle}>Reset Average Buy</button>
+            <button onClick={handleResetAverageSell} className={styles.buttonGraphToggle}>Reset Average Sell</button>
             <PriceHistoryContext.Provider value={priceHistory}>
                 {isGraphVisible ? <HistoryGraph /> : ""}
             </PriceHistoryContext.Provider>
