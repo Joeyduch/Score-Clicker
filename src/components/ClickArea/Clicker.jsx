@@ -10,6 +10,7 @@ function Clicker(props) {
     const [clickValue, setClickValue] = useState(1);
 
     const buttonRef = useRef(undefined);
+    const windowWidthRef = useRef(0);
 
     const gameScore = useContext(ScoreStateContext);
     const gameUpgrades = useContext(UpgradesStateContext);
@@ -37,6 +38,10 @@ function Clicker(props) {
     }
 
     const handleWindowResize = () => {
+        // make sure to reset position only on horizontal resize
+        if(window.innerWidth === windowWidthRef.current) return 
+        windowWidthRef.current = window.innerWidth;
+        
         setPosition(p => ({x:0, y:0}));
     }
 
