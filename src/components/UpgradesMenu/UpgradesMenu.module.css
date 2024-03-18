@@ -24,14 +24,7 @@
 
     padding: 8px 12px;
 
-    color: black;
-
-    background: var(--gradient-yellow);
-    background-color: rgb(20, 20, 20);
-
     font-weight: bolder;
-
-    transition: all 200ms;
 }
 
 .toggleButton:hover {
@@ -69,7 +62,6 @@
 }
 
 .buyButton {
-    background: var(--gradient-green);
 
     box-shadow: 2px 2px 4px 0px rgba(0,0,0, 0.5);
 }

@@ -4,13 +4,18 @@ import { PriceHistoryContext } from "./Market";
 import styles from "./HistoryGraph.module.css";
 
 function HistoryGraph() {
+    // state values
     const [priceHighest, setPriceHighest] = useState(0);
     const [priceLowest, setPriceLowest] = useState(0);
 
+    // context values
     const priceHistory = useContext(PriceHistoryContext);
 
+    // reference values
     const canvasRef = useRef(undefined);
+    const windowWidthRef = useRef(0);
 
+    // static values
     const drawStyles = {
         color: "black",
         colorProfit: "green",
@@ -62,6 +67,11 @@ function HistoryGraph() {
 
 
     const resizeCanvasDOM = () => {
+        // make sure its only on horizontal resize
+        if(windowWidthRef.current === window.innerWidth) return;
+        windowWidthRef.current = window.innerWidth;
+
+        // canvas resize
         const canvas = canvasRef.current;
         if(!canvas) return;
 
