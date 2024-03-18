@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect, createContext, useContext } from "react";
 import PropTypes from "prop-types";
-import { ScoreStateContext, UpgradesStateContext } from "../../App";
+import { ScoreStateContext, UpgradesStateContext, MarketManagerContext } from "../../App";
 import HistoryGraph from "./HistoryGraph";
 import styles from "./Market.module.css";
 
@@ -11,13 +11,13 @@ export const PriceHistoryContext = createContext([]);
 
 function Market(props) {
     // ticket data
-    const [ticketName, setTicketName] = useState(props.name || "Ticket");
-    const [ticketPrice, setTicketPrice] = useState(props.priceStart || 50);
+    const [ticketName, setTicketName] = useState("Default");
+    const [ticketPrice, setTicketPrice] = useState(2);
     const [ticketAmount, setTicketAmount] = useState(0);
 
-    const [priceMaximum, setPriceMaximum] = useState(props.priceMaximum || 100);
-    const [priceMinimum, setPriceMinimum] = useState(props.priceMinimum || 10);
-    const [priceChangeInfluence, setPriceChangeInfluence] = useState(props.priceInfluence || 5);
+    const [priceMaximum, setPriceMaximum] = useState(3);
+    const [priceMinimum, setPriceMinimum] = useState(1);
+    const [priceChangeInfluence, setPriceChangeInfluence] = useState(1);
 
     // buy total data
     const [buyAmount, setBuyAmount] = useState(1);
@@ -42,18 +42,28 @@ function Market(props) {
     const [marketSpeed, setMarketSpeed] = useState(1000); // miliseconds
     const [isGraphVisible, setIsGraphVisible] = useState(true);
 
+    // ref values
+    const marketIndexRef = useRef(props.marketIndex !== null ? props.marketIndex : -1);
+
     // context values
     const gameScore = useContext(ScoreStateContext);
     const gameUpgrades = useContext(UpgradesStateContext);
+    const gameMarketManager = useContext(MarketManagerContext);
 
     
     const handleBuy = () => {
         if(gameScore.score < buyPrice) return;
+
         gameScore.setScore(s => s - buyPrice);
         setTicketAmount(a => a + Number(buyAmount));
 
         setTotalBought(b => b + Number(buyAmount));
         setTotalExpenses(e => e + Number(buyPrice));
+
+        if(gameMarketManager) { // save to context data
+            const marketCurrent = gameMarketManager.getMarketByIndex(marketIndexRef.current);
+            marketCurrent.amount += Number(buyAmount);
+        }
     }
 
     const handleSell = () => {
@@ -63,6 +73,11 @@ function Market(props) {
 
         setTotalSold(s => s + Number(buyAmount));
         setTotalIncome(i => i + Number(buyPrice));
+
+        if(gameMarketManager) { // save to context data
+            const marketCurrent = gameMarketManager.getMarketByIndex(marketIndexRef.current);
+            marketCurrent.amount -= Number(buyAmount);
+        }
     }
 
     const handleAmountInput = (event) => {
@@ -115,6 +130,11 @@ function Market(props) {
 
         // set the new price
         setTicketPrice(p => p + priceChange);
+
+        if(gameMarketManager) { // save to context data
+            const marketCurrent = gameMarketManager.getMarketByIndex(marketIndexRef.current);
+            marketCurrent.basePrice += Number(priceChange);
+        }
     }
 
 
@@ -131,7 +151,7 @@ function Market(props) {
 
 
     const updatePriceHistoryLifespan = () => {
-        const historyLifespanUpgrade = gameUpgrades.upgrades[1].upgradeList[0].getCurrentLevel();
+        const historyLifespanUpgrade = gameUpgrades.upgrades.getByIdentifier("marketHistoryLifespan").getCurrentLevel();
         setPriceHistoryLifespan(basePriceHistoryLifespan + historyLifespanUpgrade);
     }
 
@@ -174,11 +194,26 @@ function Market(props) {
     }, [ticketPrice])
 
 
+    // On mount
+    useEffect(() => {
+        // load market from context data
+        if(gameMarketManager) {
+            const marketCurrent = gameMarketManager.getMarketByIndex(marketIndexRef.current);
+            setTicketName(n => marketCurrent.name);
+            setTicketPrice(p => marketCurrent.basePrice);
+            setPriceMinimum(min => marketCurrent.priceMinimum);
+            setPriceMaximum(max => marketCurrent.priceMaximum);
+            setPriceChangeInfluence(i => marketCurrent.priceInfluence);
+            setTicketAmount(a => marketCurrent.amount);
+        }
+    }, [])
+
+
     return (
         <div className={styles.Market}>
             <p className={styles.title}>{ticketName.toUpperCase()} MARKET</p>
             <p>You have <span className={styles.accentText}>{ticketAmount}</span> {ticketName}(s)</p>
-            <p className={styles.price}>Ticket price: <span className={styles.priceNumber}>{ticketPrice}</span> Score</p>
+            <p className={styles.price}>{ticketName} price: <span className={styles.priceNumber}>{ticketPrice}</span> Score</p>
 
             <label className={styles.amountInputArea}>
                 Buy / Sell amount: <input className={styles.amountInput} onChange={(e)=>handleAmountInput(e)} type="number" value={buyAmount}/>

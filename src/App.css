@@ -8,6 +8,8 @@
   margin-bottom: 2rem;
 }
 
+
+
 .score {
   z-index: 10;
   position: fixed;
@@ -20,6 +22,42 @@
 
   text-shadow: 0px 0px 4px black;
 }
+
+
+
+.optionsArea {
+  display: flex;
+
+  position:fixed;
+  bottom: 0px;
+}
+
+.optionsToggle {
+  width: fit-content;
+
+  padding: 4px 8px;
+
+}
+
+.options > * {
+  padding: 4px 32px;
+}
+
+.optionsButtonLoad:hover {
+  background-color: rgb(0, 75, 125);
+}
+
+.optionsButtonSave:hover {
+  background-color: rgb(125, 75, 0);
+}
+
+.optionsButtonReset:hover {
+  background-color: darkred;
+
+  text-shadow: 0px 0px 4px white;
+}
+
+
 
 .copyrights {
   text-align: center;

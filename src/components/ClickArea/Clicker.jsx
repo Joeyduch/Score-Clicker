@@ -51,7 +51,7 @@ function Clicker(props) {
 
     // On Render
     useEffect(() => {
-        const upgrade = gameUpgrades.upgrades[0].upgradeList[0]
+        const upgrade = gameUpgrades.upgrades.getList()[0];
         setClickValue(c => 1 + upgrade.getCurrentLevel());
     })
 

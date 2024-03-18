@@ -50,11 +50,15 @@ button {
 
     background-origin: border-box !important;
 
+    color: white;
+    background-color: rgb(20, 20, 20);
+
     transition: all 200ms;
 }
 
 button:hover {
     border: 2px solid white;
+    background-color: rgb(50, 50, 50);
 }
 
 
