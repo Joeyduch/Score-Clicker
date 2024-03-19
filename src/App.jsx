@@ -145,7 +145,7 @@ export default function App() {
       </ScoreStateContext.Provider>
 
       <div className="optionsArea">
-        <button onClick={handleOptionsToggle} className="optionsToggle">⚙️</button>
+        <button onClick={handleOptionsToggle} className="optionsToggle">💾</button>
         {isOptionsShown ? <>
           <div className="options">
             <button className="optionsButtonLoad" onClick={localStorageLoad}>Load Game</button>

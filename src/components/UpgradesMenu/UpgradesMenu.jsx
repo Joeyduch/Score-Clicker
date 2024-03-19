@@ -43,7 +43,7 @@ export default function Upgrades() {
 
 
     return <div className={styles.Upgrades}>
-        <button className={styles.toggleButton} onClick={handleTabToggle}>Upgrades</button>
+        <button className={styles.toggleButton} onClick={handleTabToggle}>📈</button>
         {isTabOpened ? body : ""}
     </div>
 }

@@ -19,13 +19,16 @@
 }
 
 .toggleButton {
+    width: fit-content;
+    aspect-ratio: 1/1;
+
     position: inherit;
     right: 0px;
 
     padding: 8px 12px;
 
     font-weight: bolder;
-    font-size: 1.2rem;
+    font-size: 2rem;
 }
 
 .toggleButton:hover {
