@@ -40,7 +40,6 @@ function Market(props) {
 
     // misc
     const [marketSpeed, setMarketSpeed] = useState(1000); // miliseconds
-    const [isGraphVisible, setIsGraphVisible] = useState(true);
 
     // ref values
     const marketIndexRef = useRef(props.marketIndex !== null ? props.marketIndex : -1);
@@ -63,6 +62,8 @@ function Market(props) {
         if(gameMarketManager) { // save to context data
             const marketCurrent = gameMarketManager.getMarketByIndex(marketIndexRef.current);
             marketCurrent.amount += Number(buyAmount);
+            marketCurrent.totalBought += Number(buyAmount);
+            marketCurrent.totalExpenses += Number(buyPrice);
         }
     }
 
@@ -77,6 +78,8 @@ function Market(props) {
         if(gameMarketManager) { // save to context data
             const marketCurrent = gameMarketManager.getMarketByIndex(marketIndexRef.current);
             marketCurrent.amount -= Number(buyAmount);
+            marketCurrent.totalSold += Number(buyAmount);
+            marketCurrent.totalIncome += Number(buyPrice);
         }
     }
 
@@ -86,20 +89,27 @@ function Market(props) {
     }
 
 
-    const handleGraphToggle = () => {
-        setIsGraphVisible(v => !v);
-    }
-
-
     const handleResetAverageBuy = () => {
         setTotalBought(b => 0);
         setTotalExpenses(e => 0);
+
+        if(gameMarketManager) { // save to context data
+            const marketCurrent = gameMarketManager.getMarketByIndex(marketIndexRef.current);
+            marketCurrent.totalBought = 0;
+            marketCurrent.totalExpenses = 0;
+        }
     }
 
 
     const handleResetAverageSell = () => {
         setTotalSold(s => 0);
         setTotalIncome(i => 0);
+
+        if(gameMarketManager) { // save to context data
+            const marketCurrent = gameMarketManager.getMarketByIndex(marketIndexRef.current);
+            marketCurrent.totalSold = 0;
+            marketCurrent.totalIncome = 0;
+        }
     }
 
 
@@ -205,6 +215,11 @@ function Market(props) {
             setPriceMaximum(max => marketCurrent.priceMaximum);
             setPriceChangeInfluence(i => marketCurrent.priceInfluence);
             setTicketAmount(a => marketCurrent.amount);
+
+            setTotalBought(tb => marketCurrent.totalBought);
+            setTotalExpenses(te => marketCurrent.totalExpenses);
+            setTotalSold(ts => marketCurrent.totalSold);
+            setTotalIncome(ti => marketCurrent.totalIncome);
         }
     }, [])
 
@@ -229,12 +244,13 @@ function Market(props) {
                 <p>Average sell price: <span className={styles.accentText}>{sellAverage.toFixed(2)}</span></p>
             </div>
             
-
-            <button onClick={handleGraphToggle} className={styles.buttonGraphToggle}>Toggle Graph</button>
-            <button onClick={handleResetAverageBuy} className={styles.buttonGraphToggle}>Reset Average Buy</button>
-            <button onClick={handleResetAverageSell} className={styles.buttonGraphToggle}>Reset Average Sell</button>
+            <div className={styles.optionsArea}>
+                <button onClick={handleResetAverageBuy} className={styles.optionsButton}>Reset Average Buy</button>
+                <button onClick={handleResetAverageSell} className={styles.optionsButton}>Reset Average Sell</button>
+            </div>
+            
             <PriceHistoryContext.Provider value={priceHistory}>
-                {isGraphVisible ? <HistoryGraph /> : ""}
+                <HistoryGraph />
             </PriceHistoryContext.Provider>
         </div>
     )

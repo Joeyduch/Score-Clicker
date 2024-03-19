@@ -73,16 +73,8 @@
 }
 
 
-.buttonGraphToggle {
-    padding: 4px 8px;
-
-    border-radius: 4px;
-    
-    transition: all 200ms;
-}
-
-.buttonGraphToggle:hover {
-    border-color: transparent;
+.optionsArea{
+    display: flex;
 }
 
 

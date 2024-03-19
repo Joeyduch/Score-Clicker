@@ -4,14 +4,22 @@ export default class MarketManager {
 
         if(Array.isArray(marketArray)) {
             marketArray.forEach(object => {
-                this.addMarket(object.name, object.basePrice, object.priceMinimum, object.priceMaximum, object.priceInfluence, object.amount, object.neededUpgradeIdentifier);
+                this.addMarket(
+                    object.name,
+                    object.basePrice,
+                    object.priceMinimum, object.priceMaximum,
+                    object.priceInfluence,
+                    object.amount,
+                    object.neededUpgradeIdentifier,
+                    object.totalBought, object.totalExpenses,
+                    object.totalSold, object.totalIncome);
             })
         }
     }
 
 
-    addMarket(name="currency", basePrice=50, priceMinimum=10, priceMaximum=100, priceInfluence=5, amount=0, neededUpgradeIdentifier="") {
-        this.list.push(new Market(name, basePrice, priceMinimum, priceMaximum, priceInfluence, amount, neededUpgradeIdentifier));
+    addMarket(name, basePrice, priceMinimum, priceMaximum, priceInfluence, amount, neededUpgradeIdentifier, totalBought, totalExpenses, totalSold, totalIncome) {
+        this.list.push(new Market(name, basePrice, priceMinimum, priceMaximum, priceInfluence, amount, neededUpgradeIdentifier, totalBought, totalExpenses, totalSold, totalIncome));
     }
 
 
@@ -124,7 +132,14 @@ export default class MarketManager {
 
 
 class Market {
-    constructor(name="currency", basePrice=50, priceMinimum=10, priceMaximum=100, priceInfluence=5, amount=0, neededUpgradeIdentifier="") {
+    constructor(name="currency",
+                basePrice=50,
+                priceMinimum=10, priceMaximum=100,
+                priceInfluence=5,
+                amount=0,
+                neededUpgradeIdentifier="",
+                totalBought=0, totalExpenses=0,
+                totalSold=0, totalIncome=0) {
         this.name = name;
         this.basePrice = basePrice;
         this.priceMinimum = priceMinimum;
@@ -132,6 +147,10 @@ class Market {
         this.priceInfluence = priceInfluence;
         this.amount = amount;
         this.neededUpgradeIdentifier = neededUpgradeIdentifier;
+        this.totalBought = totalBought;
+        this.totalExpenses = totalExpenses;
+        this.totalSold = totalSold;
+        this.totalIncome = totalIncome;
     }
 }
 
