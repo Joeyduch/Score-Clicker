@@ -2,9 +2,13 @@
 TO DO
     - Fix: ultra-small screens -> smaller fonts
     - Format score at very high numbers
+    - Market graph options
+        - dot size
+        - color scheme
     - Better upgrades
         - timer-autoclicker, markets all have different currency name
         - a better way to access them in JSX (instead of array[i]upgrade[n] somethin somethin...)
+    - Version check: if game is not at same version as save data, save game is wiped and reset
 
 
 

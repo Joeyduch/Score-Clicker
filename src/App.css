@@ -30,14 +30,6 @@
   bottom: 0px;
 }
 
-.optionsToggle {
-  /* width: fit-content;
-  aspect-ratio: 1/1;
-
-  font-size: 2rem;
-  font-weight: bolder; */
-}
-
 .options {
   height: 100%;
   display: flex;

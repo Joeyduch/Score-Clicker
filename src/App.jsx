@@ -41,7 +41,7 @@ export default function App() {
     new Upgrade("marketEasy", "Access Ticket Market (easy)", 20, 1, 1),
     new Upgrade("marketMedium", "Access TixCoin Market (medium)", 800, 1, 1),
     new Upgrade("marketHard", "Access Golden-T Market (hard)", 5000, 1, 1),
-    new Upgrade("marketHistoryLifespan", "Price History Lifespan", 10, 1.2, 20),
+    new Upgrade("marketHistoryLifespan", "Price History Lifespan", 10, 1.2, 50),
   ]));
 
   const [marketManager, setMarketManager] = useState(new MarketManager([
@@ -105,8 +105,11 @@ export default function App() {
     };
 
     // load markets
-    marketsKeyRef.current += 1;
-    setMarketManager(m => new MarketManager([... storageMarkets]));
+    if(storageMarkets!==null) {
+      marketsKeyRef.current += 1;
+      setMarketManager(m => new MarketManager([... storageMarkets]));
+    }
+    
 
     // post-loading
     if(closeOptionsMenu) setIsOptionsShown(os => false);
@@ -131,7 +134,7 @@ export default function App() {
     setOptions(o => {return {... options, isAutosaveEnabled:!options.isAutosaveEnabled}})
 
     // save new options
-    localStorage.setItem("options", JSON.stringify({... options, isAutosaveEnabled:!options.isAutosaveEnabled}))
+    localStorage.setItem("options", JSON.stringify({... options, isAutosaveEnabled:!options.isAutosaveEnabled}));
   }
 
 
