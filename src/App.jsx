@@ -31,7 +31,7 @@ export default function App() {
 
   const [options, setOptions] = useState({
     isAutosaveEnabled: true,
-    autosaveCooldownSeconds: 30,
+    autosaveCooldownSeconds: 10,
   });
   
   const [autosaveTimerCycle, setAutosaveTimerCycle] = useState(0); // to properly auto-save

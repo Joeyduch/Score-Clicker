@@ -236,7 +236,7 @@ function Market(props) {
 
             <div className={styles.buyOptions}>
                 <button className={styles.buttonBuy} onClick={handleBuy}>Buy {buyAmount} {ticketName}(s) for <span className={styles.accentText}>{buyPrice}</span> Score</button>
-                <button className={styles.buttonSell} onClick={handleSell}>Convert {buyAmount} {ticketName}(s) into <span className={styles.accentText}>{buyPrice}</span> Score</button>
+                <button className={styles.buttonSell} onClick={handleSell}>Sell {buyAmount} {ticketName}(s) for <span className={styles.accentText}>{buyPrice}</span> Score</button>
             </div>
             
             <div className={styles.averagesArea}>
