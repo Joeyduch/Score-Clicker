@@ -24,9 +24,17 @@ export const MarketManagerContext = createContext(undefined);
 
 
 export default function App() {
+  // state values
   const [score, setScore] = useState(0);
 
   const [isOptionsShown, setIsOptionsShown] = useState(false);
+
+  const [options, setOptions] = useState({
+    isAutosaveEnabled: true,
+    autosaveCooldownSeconds: 30,
+  });
+  
+  const [autosaveTimerCycle, setAutosaveTimerCycle] = useState(0); // to properly auto-save
 
   const [upgrades, setUpgrades] = useState(new UpgradeList([
     new Upgrade("clickValue", "Click Value", 5, 2),
@@ -42,33 +50,40 @@ export default function App() {
     {name:"golden-t", basePrice:5000, priceMinimum:2000, priceMaximum:10000, priceInfluence:100, neededUpgradeIdentifier:"marketHard"},
   ]));
 
+  // reference values
   const marketsKeyRef = useRef(0); // used to force re-render of markets
 
 
+
   // save / load / clear save-game
-  const localStorageSave = () => {
+  const localStorageSave = (closeOptionsMenu=true) => {
     localStorage.setItem("score", score);
+    localStorage.setItem("options", JSON.stringify(options));
     localStorage.setItem("upgrades", JSON.stringify(upgrades));
     localStorage.setItem("markets", JSON.stringify(marketManager.list));
 
     // post-saving
-    setIsOptionsShown(o => false);
+    if(closeOptionsMenu) setIsOptionsShown(os => false);
     console.log("--GAME SAVED--");
   }
 
 
-  const localStorageLoad = () => {
+  const localStorageLoad = (closeOptionsMenu=true) => {
     if(localStorage.length <= 0) {
       console.warn("No data to load in localStorage");
       return;
     }
 
     const storageScore = localStorage.getItem("score");
+    const storageOptions = JSON.parse(localStorage.getItem("options"));
     const storageUpgrades = JSON.parse(localStorage.getItem("upgrades"));
     const storageMarkets = JSON.parse(localStorage.getItem("markets"));
     
     // load score
     if(storageScore!==null) setScore(s => Number(storageScore));
+
+    // load options
+    if(storageOptions!==null) setOptions(o => {return {... storageOptions}});
 
     // load upgrades
     if(storageUpgrades!==null) {
@@ -94,7 +109,7 @@ export default function App() {
     setMarketManager(m => new MarketManager([... storageMarkets]));
 
     // post-loading
-    setIsOptionsShown(o => false);
+    if(closeOptionsMenu) setIsOptionsShown(os => false);
     console.log("--GAME LOADED--");
   }
 
@@ -112,15 +127,37 @@ export default function App() {
     setIsOptionsShown(o => !o);
   }
 
+  const handleAutosaveToggle = () => {
+    setOptions(o => {return {... options, isAutosaveEnabled:!options.isAutosaveEnabled}})
 
-  
+    // save new options
+    localStorage.setItem("options", JSON.stringify({... options, isAutosaveEnabled:!options.isAutosaveEnabled}))
+  }
 
-  
-  // autoload save-game on App mount
+
+  // autoload
   useEffect(() => {
     if(localStorage.length > 0) localStorageLoad();
     else console.log("--NEW GAME--");
   }, []);
+
+
+  // enable auto-save
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setAutosaveTimerCycle(c => c + 1);
+    }, options.autosaveCooldownSeconds * 1000 || 10000);
+
+    return(() => {
+      clearInterval(intervalId);
+    })
+  }, []);
+
+  useEffect(() => {
+    if(!options.isAutosaveEnabled || autosaveTimerCycle===0) return;
+    console.log("--AUTOSAVE--");
+    localStorageSave(false);
+  }, [autosaveTimerCycle]);
 
 
   return (
@@ -145,9 +182,10 @@ export default function App() {
       </ScoreStateContext.Provider>
 
       <div className="optionsArea">
-        <button onClick={handleOptionsToggle} className="optionsToggle">💾</button>
+        <button onClick={handleOptionsToggle} className="buttonRoundOption">💾</button>
         {isOptionsShown ? <>
           <div className="options">
+            {options.isAutosaveEnabled ? <button onClick={handleAutosaveToggle}>Autosave Enabled</button> : <button onClick={handleAutosaveToggle}>Autosave Disabled</button>}
             <button className="optionsButtonLoad" onClick={localStorageLoad}>Load Game</button>
             <button className="optionsButtonSave" onClick={localStorageSave}>Save Game</button>
             <button className="optionsButtonReset" onClick={localStorageClear}>Reset Game</button>

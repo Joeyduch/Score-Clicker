@@ -20,6 +20,8 @@
 */
 
 *, body {
+    user-select: none;
+
     margin: 0;
     padding: 0;
 
@@ -37,11 +39,32 @@ body {
 
 
 /*
+    GLOBAL CLASSES
+*/
+.buttonRoundOption {
+    width: fit-content;
+    aspect-ratio: 1/1;
+
+    border-radius: 12px;
+    border-color:rgba(255,255,255, 0.1);
+
+    font-size: 2rem;
+    font-weight: bolder;
+}
+.buttonRoundOption:hover {
+    box-shadow: 0px 0px 8px 0px white;
+}
+
+
+
+/*
     ELEMENTS
 */
 
 button {
     user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
 
     padding: 4px 8px;
 

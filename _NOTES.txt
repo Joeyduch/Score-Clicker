@@ -1,6 +1,7 @@
 
 TO DO
     - Fix: ultra-small screens -> smaller fonts
+    - Format score at very high numbers
     - Better upgrades
         - timer-autoclicker, markets all have different currency name
         - a better way to access them in JSX (instead of array[i]upgrade[n] somethin somethin...)
